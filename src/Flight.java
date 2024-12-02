@@ -1,22 +1,23 @@
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
 
 public class Flight {
     
     private int flightNumber;
     private String route;
-    private String points;
-    private Time sendTime;
+    private String boardingPoints;
+    private LocalTime sendTime;
     private Date sendDate;
     private int emptyPlaces;
 
     public Flight() {
     }
 
-    public Flight(int flightNumber, String route, String points, Time sendTime, Date sendDate, int emptyPlaces) {
+    public Flight(int flightNumber, String route, String boardingPoints, LocalTime sendTime, Date sendDate, int emptyPlaces) {
         this.flightNumber = flightNumber;
         this.route = route;
-        this.points = points;
+        this.boardingPoints = boardingPoints;
         this.sendTime = sendTime;
         this.sendDate = sendDate;
         this.emptyPlaces = emptyPlaces;
@@ -38,19 +39,19 @@ public class Flight {
         this.route = route;
     }
 
-    public String getPoints() {
-        return points;
+    public String getBoardingPoints() {
+        return boardingPoints;
     }
 
-    public void setPoints(String points) {
-        this.points = points;
+    public void setBoardingPoints(String boardingPoints) {
+        this.boardingPoints = boardingPoints;
     }
 
-    public Time getSendTime() {
+    public LocalTime getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Time sendTime) {
+    public void setSendTime(LocalTime sendTime) {
         this.sendTime = sendTime;
     }
 
