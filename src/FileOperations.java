@@ -54,9 +54,7 @@ public class FileOperations {
             Scanner scan = new Scanner(System.in);
             Flight flight = new Flight();
             SimpleDateFormat dateFormater = new SimpleDateFormat("dd.MM.yyyy");
-            DateTimeFormatter timeFormater = DateTimeFormatter.ofPattern("HH:mm:ss");
-            Date date = new Date();
-            LocalTime time = LocalTime.now();
+            DateTimeFormatter timeFormater = DateTimeFormatter.ofPattern("HH:mm");
 
             System.out.print("Введите номер рейса: ");
             String flightNumber = scan.nextLine();
@@ -71,16 +69,31 @@ public class FileOperations {
             flight.setBoardingPoints(scan.nextLine());
             writer.write(flight.getBoardingPoints() + " | ");
 
-            System.out.print("Введите время отправления: ");
+            System.out.print("Введите время отправления(чч:мм): ");
             String stringTime = scan.nextLine();
-            time = LocalTime.parse(stringTime, timeFormater);
+            LocalTime time = LocalTime.parse(stringTime, timeFormater);
             flight.setSendTime(time);
             writer.write(stringTime + " | ");
-            
+
+            System.out.print("Введите дни отправления(дд.мм.гггг): ");
+            String stringDays = scan.nextLine();
+            Date date = dateFormater.parse(stringDays);
+            flight.setSendDate(date);
+            writer.write(dateFormater.format(date) + " | ");
+
+            System.out.print("Введите количество свободных мест на каждом рейсе: ");
+            String emptyPlaces= scan.nextLine();
+            flight.setEmptyPlaces(Integer.parseInt(emptyPlaces));
+            writer.write(emptyPlaces);
+
+            writer.append("\n");
+
             writer.flush();
             
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 }

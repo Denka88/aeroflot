@@ -70,4 +70,8 @@ public class Flight {
     public void setEmptyPlaces(int emptyPlaces) {
         this.emptyPlaces = emptyPlaces;
     }
+
+    public void setSendDate(java.util.Date date) {
+
+    }
 }
