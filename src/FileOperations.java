@@ -1,3 +1,5 @@
+import com.sun.jdi.Value;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -145,6 +147,41 @@ public class FileOperations {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+    
+    public static void findFlight(String fileName){
+
+        Scanner scan = new Scanner(System.in);
+
+        SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yyyy");
+        DateTimeFormatter timeFormater = DateTimeFormatter.ofPattern("HH:mm");
+        
+
+        ArrayList<Flight> flights = readFile(fileName);
+        ArrayList<Flight> targets = new ArrayList<>();
+
+        System.out.print("Поиск: ");
+        String search = scan.nextLine();
+
+        Flight target = null;
+        for (Flight flight : flights) {
+            if (String.valueOf(flight.getFlightNumber()).equals(search) || flight.getRoute().equals(search) || flight.getBoardingPoints().equals(search) || flight.getSendTime().format(timeFormater).equals(search)  || formater.format(flight.getSendDate()).equals(search) || String.valueOf(flight.getEmptyPlaces()).equals(search)) {
+                target = flight;
+                targets.add(target);
+            }
+        }
+        
+        if (!targets.isEmpty()) {
+            System.out.println("+++Рейс найден+++\n");
+        }
+        else {
+            System.out.println("---Рейс не найден---");
+        }
+        for(Flight flight : targets){
+            System.out.println(flights.indexOf(flight) + ". " + flight.getFlightNumber() + " " + flight.getRoute() + " " + flight.getBoardingPoints() + " " + flight.getSendTime() + " " + formater.format(flight.getSendDate()) + " " + flight.getEmptyPlaces());
+        }
+        System.out.println();
+        
     }
     
 }

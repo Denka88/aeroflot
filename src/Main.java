@@ -30,6 +30,7 @@ public class Main {
                     FileOperations.deleteFlightFromFile(fileName);
                     break;
                 case 4:
+                    FileOperations.findFlight(fileName);
                     break;
                 case 5:
                     System.out.print("Досвидания");
