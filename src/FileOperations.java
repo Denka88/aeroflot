@@ -107,4 +107,44 @@ public class FileOperations {
         System.out.print("\n");
         return flightList;
     }
+
+    public static void deleteFlightFromFile(String fileName) {
+
+        Scanner scan = new Scanner(System.in);
+
+        SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yyyy");
+
+        ArrayList<Flight> flights = readFile(fileName);
+
+        System.out.print("Введите номер для удаления: ");
+        int numForDelete = scan.nextInt();
+
+        Flight deleteTarget = null;
+        for (Flight flight : flights) {
+            if (flights.indexOf(flight) == numForDelete) {
+                deleteTarget = flight;
+                break;
+            }
+        }
+        if (deleteTarget != null) {
+            flights.remove(deleteTarget);
+        }
+
+        try{
+            FileWriter writer = new FileWriter(fileName);
+            for (Flight flight : flights) {
+                writer.write(flight.getFlightNumber() + " | ");
+                writer.write(flight.getRoute() + " | ");
+                writer.write(flight.getBoardingPoints() + " | ");
+                writer.write(flight.getSendTime() + " | ");
+                writer.write(formater.format(flight.getSendDate()) + " | ");
+                writer.write(flight.getEmptyPlaces() + " | ");
+                writer.append("\n");
+                writer.flush();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    
 }

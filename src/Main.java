@@ -27,6 +27,7 @@ public class Main {
                     FileOperations.readFile(fileName);
                     break;
                 case 3:
+                    FileOperations.deleteFlightFromFile(fileName);
                     break;
                 case 4:
                     break;
