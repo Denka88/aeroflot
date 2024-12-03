@@ -1,5 +1,4 @@
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 import java.time.LocalTime;
 
 public class Flight {
@@ -21,9 +20,6 @@ public class Flight {
         this.sendTime = sendTime;
         this.sendDate = sendDate;
         this.emptyPlaces = emptyPlaces;
-    }
-
-    public Flight(int flightNumber, String route, String boardingPoints, LocalTime sendTime, java.util.Date sendDate, int emptyPlaces) {
     }
 
     public int getFlightNumber() {
@@ -73,8 +69,5 @@ public class Flight {
     public void setEmptyPlaces(int emptyPlaces) {
         this.emptyPlaces = emptyPlaces;
     }
-
-    public void setSendDate(java.util.Date date) {
-
-    }
+    
 }

@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
+import java.util.Date;
 
 public class FileOperations {
     
@@ -88,7 +88,6 @@ public class FileOperations {
                 LocalTime sendTime = LocalTime.parse(dataArray[3], timeFormater);
                 Date sendDate = formater.parse(dataArray[4]);
                 int emptyPlaces = Integer.parseInt(dataArray[5]);
-                System.out.println(flightNumber + " " + route + " " + boardingPoints + " " + sendTime + " " + sendDate + " " + emptyPlaces);
                 Flight flight = new Flight(flightNumber, route, boardingPoints, sendTime, sendDate, emptyPlaces);
                 flightList.add(flight);
             }
@@ -103,7 +102,7 @@ public class FileOperations {
         System.out.print("\n");
         int i = 0;
         for (Flight flight : flightList) {
-            System.out.println(i++ + ". " + flight.getFlightNumber() + " " + flight.getRoute() + " " + flight.getBoardingPoints() + " " + flight.getSendTime() + " " + flight.getSendDate() + " " + flight.getEmptyPlaces());
+            System.out.println(i++ + ". " + flight.getFlightNumber() + " " + flight.getRoute() + " " + flight.getBoardingPoints() + " " + flight.getSendTime() + " " + formater.format(flight.getSendDate()) + " " + flight.getEmptyPlaces());
         }
         System.out.print("\n");
         return flightList;
