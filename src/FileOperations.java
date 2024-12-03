@@ -1,10 +1,9 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -24,32 +23,6 @@ public class FileOperations {
 
     public static void writeFile(String fileName) {
         try (FileWriter writer = new FileWriter(fileName, true)) {
-//            Scanner scan = new Scanner(System.in);
-//            Task task = new Task();
-//
-//            SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yyyy");
-//            Date date = new Date();
-//            System.out.print("Введите имя задачи: ");
-//            task.setName(scan.nextLine());
-//            writer.write(task.getName() + " | ");
-//
-//            System.out.print("Введите описание задачи: ");
-//            task.setDescription(scan.nextLine());
-//            writer.write(task.getDescription() + " | ");
-//
-//            int year = date.getYear();
-//            int month = Calendar.getInstance().get(Calendar.MONTH);
-//            int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-//            task.setCreateDate(year, month, day);
-//
-//            writer.write(formater.format(task.getCreateDate())+ " | ");
-//            System.out.print("Введите количество дней на выполнение задачи: ");
-//            String deadline = scan.nextLine();
-//            task.setDeadline(Integer.parseInt(deadline));
-//            writer.write(deadline);
-//            writer.append("\n");
-//
-//            writer.flush();
 
             Scanner scan = new Scanner(System.in);
             Flight flight = new Flight();
@@ -95,5 +68,44 @@ public class FileOperations {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static ArrayList<Flight> readFile(String fileName) {
+        ArrayList<Flight> flightList = new ArrayList<>();
+        SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yyyy");
+        DateTimeFormatter timeFormater = DateTimeFormatter.ofPattern("HH:mm");
+
+
+        try {
+            FileReader reader = new FileReader(fileName);
+            BufferedReader fileScanner = new BufferedReader(reader);
+            while (fileScanner.ready()) {
+                String line = fileScanner.readLine();
+                String[] dataArray = line.split(" \\| ");
+                int flightNumber = Integer.parseInt(dataArray[0]);
+                String route = dataArray[1];
+                String boardingPoints = dataArray[2];
+                LocalTime sendTime = LocalTime.parse(dataArray[3], timeFormater);
+                Date sendDate = formater.parse(dataArray[4]);
+                int emptyPlaces = Integer.parseInt(dataArray[5]);
+                System.out.println(flightNumber + " " + route + " " + boardingPoints + " " + sendTime + " " + sendDate + " " + emptyPlaces);
+                Flight flight = new Flight(flightNumber, route, boardingPoints, sendTime, sendDate, emptyPlaces);
+                flightList.add(flight);
+            }
+            fileScanner.close();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.print("\n");
+        int i = 0;
+        for (Flight flight : flightList) {
+            System.out.println(i++ + ". " + flight.getFlightNumber() + " " + flight.getRoute() + " " + flight.getBoardingPoints() + " " + flight.getSendTime() + " " + flight.getSendDate() + " " + flight.getEmptyPlaces());
+        }
+        System.out.print("\n");
+        return flightList;
     }
 }

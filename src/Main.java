@@ -24,6 +24,7 @@ public class Main {
                     FileOperations.writeFile(fileName);
                     break;
                 case 2:
+                    FileOperations.readFile(fileName);
                     break;
                 case 3:
                     break;

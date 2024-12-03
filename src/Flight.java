@@ -23,6 +23,9 @@ public class Flight {
         this.emptyPlaces = emptyPlaces;
     }
 
+    public Flight(int flightNumber, String route, String boardingPoints, LocalTime sendTime, java.util.Date sendDate, int emptyPlaces) {
+    }
+
     public int getFlightNumber() {
         return flightNumber;
     }
