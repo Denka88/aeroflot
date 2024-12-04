@@ -1,5 +1,3 @@
-import com.sun.jdi.Value;
-
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,7 +8,12 @@ import java.util.Scanner;
 import java.util.Date;
 
 public class FileOperations {
-    
+
+    /**
+     * Метод создания файла.
+     * @param fileName имя файла
+     * Если файл отсутствует, то он создается.
+     */
     public static void createFile(String fileName){
         File newFile = new File(fileName);
         if (!newFile.exists()) {
@@ -23,6 +26,12 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Метод записи рейса в файл.
+     * @param fileName имя файла
+     * С помощью scan вводятся данные о рейсе и записываются в файл.
+     * С помощью форматеров LocalTime и DateTimeFormatter конвертируются строки в дату и время.
+     */
     public static void writeFile(String fileName) {
         try (FileWriter writer = new FileWriter(fileName, true)) {
 
@@ -72,6 +81,13 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Метод чтения файла.
+     * @param fileName имя файла
+     * @return список рейсов
+     * С помощью форматеров LocalTime и DateTimeFormatter конвертируются строки полученные из файла в дату и время.
+     * Список рейсов заполняется объектами класса Flight полученными из файла.
+     */
     public static ArrayList<Flight> readFile(String fileName) {
         ArrayList<Flight> flightList = new ArrayList<>();
         SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yyyy");
@@ -110,6 +126,13 @@ public class FileOperations {
         return flightList;
     }
 
+    /**
+     * Метод удаления рейса из файла.
+     * @param fileName
+     * Сначала происходит чтение файла методом readFile и записывает полученные значения в новый список
+     * Затем из списка рейсов удаляется выбранный рейс
+     * Выбор осуществляется по индексу объекта в списке
+     */
     public static void deleteFlightFromFile(String fileName) {
 
         Scanner scan = new Scanner(System.in);
@@ -148,7 +171,15 @@ public class FileOperations {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Метод поиска рейса в файле.
+     * @param fileName
+     * Сначала происходит чтение файла методом readFile.
+     * Затем вводится слово для поиска.
+     * Цикл проходит по списку рейсов и проверяет каждое значение данного рейса со словом для поиска.
+     * Если есть совпадения то выводится надпись о том, что рейс найден и подходящие рейсы
+     */
     public static void findFlight(String fileName){
 
         Scanner scan = new Scanner(System.in);

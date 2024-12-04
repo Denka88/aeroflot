@@ -5,9 +5,16 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
 
+//        Имя файла всегда постоянно
         String fileName = "flight.txt";
         FileOperations.createFile(fileName);
 
+
+        /**
+         * Главное меню
+         * Создано с помошью do-while и switch-case
+         * Пока menu не равно 5, программа будет продолжать работу
+         */
         byte menu;
         do{
             System.out.printf("""
@@ -41,7 +48,6 @@ public class Main {
             }
 
         }while (menu != 5);
-
 
     }
 }
