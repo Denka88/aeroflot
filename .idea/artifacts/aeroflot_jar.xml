@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="aeroflot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/aeroflot_jar</output-path>
+    <root id="archive" name="aeroflot.jar">
+      <element id="module-output" name="aeroflot" />
+    </root>
+  </artifact>
+</component>

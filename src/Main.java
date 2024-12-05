@@ -17,14 +17,14 @@ public class Main {
          */
         byte menu;
         do{
-            System.out.printf("""
+            System.out.print("""
                     ===Главное меню===
                     1.Создать рейс
                     2.Посмотреть список рейсов
                     3.Удалить рейс
                     4.Поиск рейсов
                     5.Завершить работу программы
-                    """, fileName);
+                    """);
             menu = scan.nextByte();
             switch(menu){
                 case 1:
